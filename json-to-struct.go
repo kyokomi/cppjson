@@ -28,7 +28,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"go/format"
 	"io"
 	"os"
 	"reflect"
@@ -37,7 +36,7 @@ import (
 	"unicode"
 )
 
-const templateStruct = "%s \n};"
+const templateStruct = "%s \n};\n"
 
 var (
 	name = flag.String("name", "Foo", "the name of the struct")
@@ -68,11 +67,11 @@ func generate(input io.Reader, structName string) ([]byte, error) {
 
 	src := fmt.Sprintf(templateStruct,
 		generateTypes(structName, result, 0))
-	formatted, err := format.Source([]byte(src))
-	if err != nil {
-		err = fmt.Errorf("error formatting: %s, was formatting\n%s", err, src)
-	}
-	return formatted, err
+//	formatted, err := format.Source([]byte(src))
+//	if err != nil {
+//		err = fmt.Errorf("error formatting: %s, was formatting\n%s", err, src)
+//	}
+	return []byte(src), nil
 }
 
 // Generate go struct entries for a map[string]interface{} structure
