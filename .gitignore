@@ -1,0 +1,12 @@
+*.swp
+*.swo
+*.swn
+*.db
+*.log
+build/
+conf.go
+cppjson
+
+# idea
+.idea
+*iml
